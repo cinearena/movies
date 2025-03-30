@@ -1,0 +1,147 @@
+/* Basic Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  background-image: url('hero.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 3em;
+}
+
+.hero-content button {
+  padding: 10px 20px;
+  background-color: #ff5733;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2em;
+}
+
+.releases h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.movie-grid {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Movie Card Styles */
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Latest Released Grid */
+.latest-released-grid {
+  grid-template-columns: repeat(2, 1fr); /* Default: 2 cards per row */
+}
+
+.see-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.see-more-btn {
+  padding: 10px 20px;
+  background-color: #ff5733;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
+/* Upcoming Releases Grid */
+.upcoming-releases .movie-grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+footer .footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+/* Responsive Styles */
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+
+  .latest-released-grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 card per row for the latest releases */
+  }
+}
+
+/* Tablet (up to 768px) */
+@media (max-width: 768px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  }
+
+  .latest-released-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for the latest releases */
+  }
+}
+
+/* Laptop or larger (greater than 768px) */
+@media (min-width: 769px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+
+  .latest-released-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for the latest releases */
+  }
+}
