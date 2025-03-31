@@ -66,6 +66,57 @@
                 background-color: rgba(255, 255, 0, 0.7);
             }
         }
+        h1 {
+            text-align: center;
+            color: #00bfff;
+            margin-bottom: 20px;
+        }
+
+        .telegram-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #0088cc;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .telegram-toggle:hover {
+            background-color: #006699;
+        }
+
+        @media (max-width: 1024px) {
+            .directory-item, .file-item {
+                width: calc(25% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .directory-item, .file-item {
+                width: calc(33.333% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .directory-item, .file-item {
+                width: calc(50% - 20px);
+                margin: 5px;
+                padding: 5px;
+            }
+
+            .telegram-toggle {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+        }
 
         /* Latest Released Movies */
         .latest-released h3 {
