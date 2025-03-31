@@ -1,128 +1,221 @@
-/* Basic Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-}
 
-/* Latest Released Movies */
-.latest-released h2 {
-  text-align: center;
-  margin-top: 20px;
-}
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
 
-.latest-released .movie-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
+        /* Menu Styling */
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            z-index: 10;
+        }
 
-.movie-card {
-  position: relative;
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
+        .menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
 
-.movie-card:hover {
-  transform: scale(1.05); /* Zoom effect on hover */
-}
+        /* Neon Glow Effect */
+        .menu a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background-color: rgba(0, 255, 255, 0.7);
+            animation: neon-border 3s infinite alternate;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: -1;
+        }
 
-.movie-card img {
-  width: 100%;
-  height: auto;
-  border-bottom: 4px solid #f1f1f1;
-  transition: transform 0.3s ease;
-}
+        @keyframes neon-border {
+            0% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 1), 0 0 20px rgba(0, 255, 255, 0.8), 0 0 30px rgba(0, 255, 255, 0.6);
+                background-color: rgba(0, 255, 255, 0.7);
+            }
 
-.movie-card:hover img {
-  transform: scale(1.1); /* Zoom effect on image when the card is hovered */
-}
+            50% {
+                box-shadow: 0 0 10px rgba(255, 0, 255, 1), 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.6);
+                background-color: rgba(255, 0, 255, 0.7);
+            }
 
-.movie-info {
-  padding: 20px;
-  text-align: center;
-}
+            100% {
+                box-shadow: 0 0 10px rgba(255, 255, 0, 1), 0 0 20px rgba(255, 255, 0, 0.8), 0 0 30px rgba(255, 255, 0, 0.6);
+                background-color: rgba(255, 255, 0, 0.7);
+            }
+        }
 
-.movie-info h3 {
-  font-size: 1.2em;
-  margin-bottom: 15px;
-}
+        h1 {
+            text-align: center;
+            color: #00bfff;
+            margin-bottom: 20px;
+        }
 
-.watch-btn {
-  padding: 10px 20px;
-  background-color: #ff5733;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-size: 1.1em;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
+        .telegram-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #0088cc;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-.watch-btn:hover {
-  background-color: #e04e1f;
-}
+        .telegram-toggle:hover {
+            background-color: #006699;
+        }
 
-/* See More Button */
-.see-more {
-  text-align: center;
-  margin-top: 20px;
-}
+        /* Latest Released Movies */
+        .latest-released h3 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            font-size: 30px;
+            color: #fff;
+            background-color: #ff5733; /* Background color */
+            padding: 5px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-.see-more-btn {
-  padding: 10px 20px;
-  background-color: #ff5733;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-size: 1.2em;
-  border-radius: 5px;
-}
+        .latest-released h2 i {
+            font-size: 1.8em;
+        }
 
-/* Responsive Styles */
+        /* Movie Grid */
+        .latest-released .movie-grid {
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+            margin-top: 0px;
+            grid-template-columns: repeat(2, 1fr); /* Default to 2 items per row for smaller screens */
+        }
 
-/* Mobile (up to 600px) */
-@media (max-width: 600px) {
-  .movie-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-  }
+        .movie-card {
+            position: relative;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
 
-  .latest-released-grid {
-    grid-template-columns: repeat(1, 1fr); /* 1 card per row for the latest releases */
-  }
+        .movie-card:hover {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
 
-  .hero-content .slide-text h1 {
-    font-size: 2em;
-  }
-}
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 4px solid #f1f1f1;
+            transition: transform 0.3s ease;
+        }
 
-/* Tablet (up to 768px) */
-@media (max-width: 768px) {
-  .movie-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
-  }
+        .movie-card:hover img {
+            transform: scale(1.1); /* Zoom effect on image when the card is hovered */
+        }
 
-  .latest-released-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for the latest releases */
-  }
+        .movie-info {
+            padding: 20px;
+            text-align: center;
+        }
 
-  .hero-content .slide-text h1 {
-    font-size: 2.5em;
-  }
-}
+        .movie-info h4 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
 
-/* Laptop or larger (greater than 768px) */
-@media (min-width: 769px) {
-  .movie-grid {
-    grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
-  }
+        .watch-btn {
+            padding: 10px 20px;
+            background-color: #ff5733;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
-  .latest-released-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for the latest releases */
-  }
-}
+        .watch-btn:hover {
+            background-color: #e04e1f;
+        }
+
+        /* See More Button */
+        .see-more {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .see-more-btn {
+            padding: 10px 20px;
+            background-color: #ff5733;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+
+        /* Responsive Styles */
+
+        /* Mobile (up to 600px) */
+        @media (max-width: 600px) {
+            .movie-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+            }
+        }
+
+        /* Tablet (up to 768px) */
+        @media (max-width: 768px) {
+             .latest-released .movie-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+            }
+        }
+
+        /* Laptop or larger (greater than 768px) */
+        @media (min-width: 769px) {
+             .latest-released .movie-grid {
+                grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
+            }
+        }
+
+        /* Mobile View Adjustments for 480px */
+        @media (max-width: 480px) {
+             .latest-released .movie-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+                margin: 5px;
+                padding: 5px;
+            }
+
+            .telegram-toggle {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+        }
+  
