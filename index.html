@@ -107,20 +107,20 @@
         <div class="movie-grid" id="movieGrid">
             <!-- Example 4 Movie Cards -->
             <div class="movie-card" data-title="Movie Title 1">
-                <img src="download (8).jpeg" alt="Movie 1">
-                <h4>Movie Title 4</h4>
+                <img src="download1.jpeg" alt="Movie 1">
+                <h4>Movie Title 1</h4>
             </div>
             <div class="movie-card" data-title="Movie Title 2">
-                <img src="download (7).jpeg" alt="Movie 2">
-                <h4>Movie Title 3</h4>
-            </div>
-            <div class="movie-card" data-title="Movie Title 3">
-                <img src="download (6).jpeg" alt="Movie 3">
+                <img src="download2.jpeg" alt="Movie 2">
                 <h4>Movie Title 2</h4>
             </div>
+            <div class="movie-card" data-title="Movie Title 3">
+                <img src="download3.jpeg" alt="Movie 3">
+                <h4>Movie Title 3</h4>
+            </div>
             <div class="movie-card" data-title="Movie Title 4">
-                <img src="download (5).jpeg" alt="Movie 4">
-                <h4>Movie Title 1</h4>
+                <img src="download4.jpeg" alt="Movie 4">
+                <h4>Movie Title 4</h4>
             </div>
         </div>
         <div class="see-more">
@@ -131,18 +131,19 @@
     <script>
         const movieGrid = document.getElementById('movieGrid');
         const seeMoreBtn = document.getElementById('seeMoreBtn');
-        let movies = [];
+        const initialMovies = [
+            { title: 'Movie Title 1', image: 'download1.jpeg' },
+            { title: 'Movie Title 2', image: 'download2.jpeg' },
+            { title: 'Movie Title 3', image: 'download3.jpeg' },
+            { title: 'Movie Title 4', image: 'download4.jpeg' }
+        ];
 
-        // Generate 50 movie posts
-        for (let i = 1; i <= 50; i++) {
-            movies.push({ title: `Movie Title ${i}`, image: `download${i % 10 + 1}.jpeg` });
-        }
+        let visibleCount = 4; // Start by showing the 4 posts
 
-        let visibleCount = 30;
-
+        // Render movies based on visibleCount
         function renderMovies() {
-            movieGrid.innerHTML = '';
-            movies.slice(0, visibleCount).forEach(movie => {
+            movieGrid.innerHTML = ''; // Clear the grid before adding new posts
+            initialMovies.slice(0, visibleCount).forEach(movie => {
                 const movieCard = document.createElement('div');
                 movieCard.classList.add('movie-card');
                 movieCard.setAttribute('data-title', movie.title);
@@ -154,14 +155,16 @@
             });
         }
 
+        // Handle See More button click
         seeMoreBtn.addEventListener('click', () => {
-            visibleCount += 10;
-            if (visibleCount >= movies.length) {
-                seeMoreBtn.style.display = 'none';
+            visibleCount += 4; // Load 4 more posts
+            if (visibleCount >= initialMovies.length) {
+                seeMoreBtn.style.display = 'none'; // Hide the button if no more posts are available
             }
             renderMovies();
         });
 
+        // Search functionality
         document.getElementById('search').addEventListener('input', function () {
             let searchValue = this.value.toLowerCase();
             let movieCards = document.querySelectorAll('.movie-card');
@@ -172,7 +175,7 @@
             });
         });
 
-        renderMovies();
+        renderMovies(); // Initial render
     </script>
 </body>
 
