@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +11,7 @@
             margin: 0;
             padding: 0;
             background-color: #000;
+            color: #fff;
         }
 
         /* Search Bar Styling */
@@ -44,7 +44,7 @@
             display: grid;
             gap: 20px;
             padding: 20px;
-            grid-template-columns: repeat(2, 1fr); /* Default for mobile */
+            grid-template-columns: repeat(2, 1fr); /* Mobile */
         }
 
         .movie-card {
@@ -103,29 +103,9 @@
     </div>
 
     <section class="latest-released">
-        <h3>Latest Released Movie</h3>
+        <h3>Latest Released Movies</h3>
         <div class="movie-grid" id="movieGrid">
-            <!-- Example 4 Movie Cards -->
-            <div class="movie-card" data-title="Movie Title 1">
-                <img src="download1.jpeg" alt="Movie 1">
-                <h4>Movie Title 1</h4>
-            </div>
-            <div class="movie-card" data-title="Movie Title 2">
-                <img src="download2.jpeg" alt="Movie 2">
-                <h4>Movie Title 2</h4>
-            </div>
-            <div class="movie-card" data-title="Movie Title 3">
-                <img src="download3.jpeg" alt="Movie 3">
-                <h4>Movie Title 3</h4>
-            </div>
-            <div class="movie-card" data-title="Movie Title 4">
-                <img src="download4.jpeg" alt="Movie 4">
-                <h4>Movie Title 4</h4>
-            </div>
-            <div class="movie-card" data-title="Movie Title 5">
-                <img src="download4.jpeg" alt="Movie 5">
-                <h4>Movie Title 5</h4>
-            </div>
+            <!-- Movies will be loaded dynamically -->
         </div>
         <div class="see-more">
             <button class="see-more-btn" id="seeMoreBtn">See More</button>
@@ -135,19 +115,27 @@
     <script>
         const movieGrid = document.getElementById('movieGrid');
         const seeMoreBtn = document.getElementById('seeMoreBtn');
-        const initialMovies = [
-            { title: 'Movie Title 1', image: 'download1.jpeg' },
-            { title: 'Movie Title 2', image: 'download2.jpeg' },
-            { title: 'Movie Title 3', image: 'download3.jpeg' },
-            { title: 'Movie Title 4', image: 'download4.jpeg' }
+
+        // Movie Data (More than 10 to test 'See More')
+        const allMovies = [
+            { title: 'Movie 1', image: 'download1.jpeg' },
+            { title: 'Movie 2', image: 'download2.jpeg' },
+            { title: 'Movie 3', image: 'download3.jpeg' },
+            { title: 'Movie 4', image: 'download4.jpeg' },
+            { title: 'Movie 5', image: 'download5.jpeg' },
+            { title: 'Movie 6', image: 'download6.jpeg' },
+            { title: 'Movie 7', image: 'download7.jpeg' },
+            { title: 'Movie 8', image: 'download8.jpeg' },
+            { title: 'Movie 9', image: 'download9.jpeg' },
+            { title: 'Movie 10', image: 'download10.jpeg' }
         ];
 
-        let visibleCount = 4; // Start by showing the 4 posts
+        let visibleCount = 5; // Start with 5 movies
 
-        // Render movies based on visibleCount
+        // Function to Render Movies
         function renderMovies() {
-            movieGrid.innerHTML = ''; // Clear the grid before adding new posts
-            initialMovies.slice(0, visibleCount).forEach(movie => {
+            movieGrid.innerHTML = ''; // Clear the grid
+            allMovies.slice(0, visibleCount).forEach(movie => {
                 const movieCard = document.createElement('div');
                 movieCard.classList.add('movie-card');
                 movieCard.setAttribute('data-title', movie.title);
@@ -157,18 +145,20 @@
                 `;
                 movieGrid.appendChild(movieCard);
             });
+
+            // Hide "See More" button when all movies are displayed
+            if (visibleCount >= allMovies.length) {
+                seeMoreBtn.style.display = 'none';
+            }
         }
 
-        // Handle See More button click
+        // Handle "See More" Button Click
         seeMoreBtn.addEventListener('click', () => {
-            visibleCount += 4; // Load 4 more posts
-            if (visibleCount >= initialMovies.length) {
-                seeMoreBtn.style.display = 'none'; // Hide the button if no more posts are available
-            }
+            visibleCount += 5; // Load 5 more movies
             renderMovies();
         });
 
-        // Search functionality
+        // Search Functionality
         document.getElementById('search').addEventListener('input', function () {
             let searchValue = this.value.toLowerCase();
             let movieCards = document.querySelectorAll('.movie-card');
@@ -179,8 +169,7 @@
             });
         });
 
-        renderMovies(); // Initial render
+        renderMovies(); // Initial render with first 5 movies
     </script>
 </body>
-
 </html>
