@@ -14,165 +14,73 @@
             background-color: #000;
         }
 
-        /* Menu Styling */
-        .menu {
+        /* Search Bar Styling */
+        .search-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            z-index: 10;
+            margin: 20px 0;
         }
 
-        .menu a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
-            transition: color 0.3s ease;
+        .search-box {
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
         }
 
-        /* Neon Glow Effect */
-        .menu a::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background-color: rgba(0, 255, 255, 0.7);
-            animation: neon-border 3s infinite alternate;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: -1;
-        }
-
-        @keyframes neon-border {
-            0% {
-                box-shadow: 0 0 10px rgba(0, 255, 255, 1), 0 0 20px rgba(0, 255, 255, 0.8), 0 0 30px rgba(0, 255, 255, 0.6);
-                background-color: rgba(0, 255, 255, 0.7);
-            }
-
-            50% {
-                box-shadow: 0 0 10px rgba(255, 0, 255, 1), 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.6);
-                background-color: rgba(255, 0, 255, 0.7);
-            }
-
-            100% {
-                box-shadow: 0 0 10px rgba(255, 255, 0, 1), 0 0 20px rgba(255, 255, 0, 0.8), 0 0 30px rgba(255, 255, 0, 0.6);
-                background-color: rgba(255, 255, 0, 0.7);
-            }
-        }
-
-        h1 {
-            text-align: center;
-            color: #00bfff;
-            margin-bottom: 20px;
-        }
-
-        .telegram-toggle {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #0088cc;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .telegram-toggle:hover {
-            background-color: #006699;
-        }
-
-        /* Latest Released Movies */
         .latest-released h3 {
             text-align: center;
             margin-top: 20px;
-            margin-bottom: 5px;
             font-size: 30px;
             color: #fff;
-            background-color: #ff5733; /* Background color */
+            background-color: #ff5733;
             padding: 5px;
             border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
 
-        .latest-released h2 i {
-            font-size: 1.8em;
-        }
-
-        /* Movie Grid */
-        .latest-released .movie-grid {
+        .movie-grid {
             display: grid;
             gap: 20px;
             padding: 20px;
-            margin-top: 0px;
-            grid-template-columns: repeat(2, 1fr); /* Default to 2 items per row for smaller screens */
+            grid-template-columns: repeat(2, 1fr); /* Default for mobile */
         }
 
         .movie-card {
-            position: relative;
             background-color: #fff;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .movie-card:hover {
-            transform: scale(1.05); /* Zoom effect on hover */
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .movie-card img {
             width: 100%;
             height: auto;
-            border-bottom: 4px solid #f1f1f1;
-            transition: transform 0.3s ease;
         }
 
-        .movie-card:hover img {
-            transform: scale(1.1); /* Zoom effect on image when the card is hovered */
+        /* Tablet View (3 posts per row) */
+        @media (min-width: 768px) {
+            .movie-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
-        .movie-info {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .movie-info h4 {
-            font-size: 1.2em;
-            margin-top:2px;
-            margin-bottom: 5px;
-        }
-
-        .watch-btn {
-            padding: 10px 20px;
-            background-color: #ff5733;
-            border: none;
-            cursor: pointer;
-            color: white;
-            font-size: 1.1em;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .watch-btn:hover {
-            background-color: #e04e1f;
+        /* Laptop View (5 posts per row) */
+        @media (min-width: 1024px) {
+            .movie-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
         }
 
         /* See More Button */
         .see-more {
             text-align: center;
-            margin-top: 10px;
+            margin: 20px;
         }
 
         .see-more-btn {
@@ -184,130 +92,88 @@
             font-size: 1.2em;
             border-radius: 5px;
         }
-
-        /* Responsive Styles */
-
-        /* Mobile (up to 600px) */
-        @media (max-width: 600px) {
-            .movie-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-            }
-        }
-
-        /* Tablet (up to 768px) */
-        @media (max-width: 768px) {
-             .latest-released .movie-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
-            }
-        }
-
-        /* Laptop or larger (greater than 768px) */
-        @media (min-width: 769px) {
-             .latest-released .movie-grid {
-                grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
-            }
-        }
-
-        /* Mobile View Adjustments for 480px */
-        @media (max-width: 480px) {
-             .latest-released .movie-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-                margin: 5px;
-                padding: 5px;
-            }
-
-            .telegram-toggle {
-                padding: 5px 10px;
-                font-size: 12px;
-            }
-
-            h1 {
-                font-size: 24px;
-                margin-bottom: 10px;
-            }
-        }
     </style>
-    <!-- Add FontAwesome for the movie icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
+    <h1>CineArena.live</h1>
 
-    <div>
-        <a href="https://t.me/cric_stream" class="telegram-toggle">Join Telegram</a>
-        <h1>CineArena.live</h1>
-    </div>
-    
-    <!-- Menu Section -->
-    <div class="menu">
-        <a href="https://cricstream4u.github.io/crictv/">Sports</a>
-        <a href="#">Music</a>
-        <a href="#">Movies</a>
+    <div class="search-container">
+        <input type="text" id="search" class="search-box" placeholder="Search movies...">
     </div>
 
-    <!-- Latest Released Movies -->
     <section class="latest-released">
-        <h3><i class="fas fa-film"></i> Latest Released Movie</h3>
-        <div class="movie-grid latest-released-grid">
-            <!-- Movie Cards (Latest) -->
-            <div class="movie-card">
-                <img src="download (4).jpeg" alt="Movie 1">
-                <div class="movie-info">
-                    <h4>Movie Title 1</h4>
-                    <button class="watch-btn">Watch Now</button>
-                </div>
+        <h3>Latest Released Movie</h3>
+        <div class="movie-grid" id="movieGrid">
+            <!-- Example 4 Movie Cards -->
+            <div class="movie-card" data-title="Movie Title 1">
+                <img src="download1.jpeg" alt="Movie 1">
+                <h4>Movie Title 1</h4>
             </div>
-            <div class="movie-card">
-                <img src="download (5).jpeg" alt="Movie 2">
-                <div class="movie-info">
-                    <h4>Movie Title 2</h4>
-                    <button class="watch-btn">Watch Now</button>
-                </div>
+            <div class="movie-card" data-title="Movie Title 2">
+                <img src="download2.jpeg" alt="Movie 2">
+                <h4>Movie Title 2</h4>
             </div>
-            <div class="movie-card">
-                <img src="download (6).jpeg" alt="Movie 3">
-                <div class="movie-info">
-                    <h4>Movie Title 3</h4>
-                    <button class="watch-btn">Watch Now</button>
-                </div>
+            <div class="movie-card" data-title="Movie Title 3">
+                <img src="download3.jpeg" alt="Movie 3">
+                <h4>Movie Title 3</h4>
             </div>
-            <div class="movie-card">
-                <img src="download (7).jpeg" alt="Movie 4">
-                <div class="movie-info">
-                    <h4>Movie Title 4</h4>
-                    <button class="watch-btn">Watch Now</button>
-                </div>
+            <div class="movie-card" data-title="Movie Title 4">
+                <img src="download4.jpeg" alt="Movie 4">
+                <h4>Movie Title 4</h4>
             </div>
-            <div class="movie-card">
-                <img src="download (8).jpeg" alt="Movie 5">
-                <div class="movie-info">
-                    <h4>Movie Title 5</h4>
-                    <button class="watch-btn">Watch Now</button>
-                </div>
-            </div>
-
-            <div class="movie-card">
-                <img src="download (8).jpeg" alt="Movie 6">
-                <div class="movie-info">
-                    <h4>Movie Title 6</h4>
-                    <button class="watch-btn">Watch Now</button>
-                </div>
-            </div>
-            
         </div>
         <div class="see-more">
-            <button class="see-more-btn">See More</button>
+            <button class="see-more-btn" id="seeMoreBtn">See More</button>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-links">
-            <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
-        </div>
-    </footer>
+    <script>
+        const movieGrid = document.getElementById('movieGrid');
+        const seeMoreBtn = document.getElementById('seeMoreBtn');
+        let movies = [];
 
-    <script src="script.js"></script>
+        // Generate 50 movie posts
+        for (let i = 1; i <= 50; i++) {
+            movies.push({ title: `Movie Title ${i}`, image: `download${i % 10 + 1}.jpeg` });
+        }
+
+        let visibleCount = 30;
+
+        function renderMovies() {
+            movieGrid.innerHTML = '';
+            movies.slice(0, visibleCount).forEach(movie => {
+                const movieCard = document.createElement('div');
+                movieCard.classList.add('movie-card');
+                movieCard.setAttribute('data-title', movie.title);
+                movieCard.innerHTML = `
+                    <img src="${movie.image}" alt="${movie.title}">
+                    <h4>${movie.title}</h4>
+                `;
+                movieGrid.appendChild(movieCard);
+            });
+        }
+
+        seeMoreBtn.addEventListener('click', () => {
+            visibleCount += 10;
+            if (visibleCount >= movies.length) {
+                seeMoreBtn.style.display = 'none';
+            }
+            renderMovies();
+        });
+
+        document.getElementById('search').addEventListener('input', function () {
+            let searchValue = this.value.toLowerCase();
+            let movieCards = document.querySelectorAll('.movie-card');
+
+            movieCards.forEach(movie => {
+                let title = movie.getAttribute('data-title').toLowerCase();
+                movie.style.display = title.includes(searchValue) ? "flex" : "none";
+            });
+        });
+
+        renderMovies();
+    </script>
 </body>
 
 </html>
