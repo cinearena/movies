@@ -1,175 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Website</title>
-    <style>
-        /* Basic Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-        }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cine Arena - Movies</title>
+  <link rel="shortcut icon" href="https://cinearena.github.io/astro-jwplyr/faviconimg.jpeg" />
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        /* Search Bar Styling */
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
+      color: white;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
 
-        .search-box {
-            width: 80%;
-            max-width: 400px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-        }
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      margin: 20px 0;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ff0077, #00eaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-title::after {
+      content: "";
+      width: 90px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff0077, #00eaff);
+      display: block;
+      margin: 6px auto 0;
+      border-radius: 6px;
+    }
 
-        .latest-released h3 {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 30px;
-            color: #fff;
-            background-color: #ff5733;
-            padding: 5px;
-            border-radius: 5px;
-        }
+    /* Cards Grid */
+    .movies-grid {
+      display: grid;
+      gap: 15px;
+      padding: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
 
-        .movie-grid {
-            display: grid;
-            gap: 20px;
-            padding: 20px;
-            grid-template-columns: repeat(2, 1fr); /* Mobile */
-        }
+    /* Force 2 per row on Mobile */
+    @media (max-width: 600px) {
+      .movies-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
 
-        .movie-card {
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: center;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    /* Card Style */
+    .movie-card {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      transition: 0.3s;
+      cursor: pointer;
+    }
 
-        .movie-card img {
-            width: 100%;
-            height: auto;
-        }
+    .movie-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+    }
 
-        /* Tablet View (3 posts per row) */
-        @media (min-width: 768px) {
-            .movie-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+    .movie-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
 
-        /* Laptop View (5 posts per row) */
-        @media (min-width: 1024px) {
-            .movie-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
+    .movie-card h3 {
+      padding: 8px;
+      font-size: 18px;
+    }
 
-        /* See More Button */
-        .see-more {
-            text-align: center;
-            margin: 20px;
-        }
-
-        .see-more-btn {
-            padding: 10px 20px;
-            background-color: #ff5733;
-            border: none;
-            cursor: pointer;
-            color: white;
-            font-size: 1.2em;
-            border-radius: 5px;
-        }
-    </style>
+    /* Telegram Floating Button */
+    .telegram-float {
+      position: fixed;
+      width: 55px;
+      height: 55px;
+      bottom: 20px;
+      right: 20px;
+      background: #0088cc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      transition: .3s;
+    }
+    .telegram-float:hover {
+      transform: scale(1.12);
+    }
+    .telegram-float img {
+      width: 60%;
+    }
+  </style>
 </head>
 
 <body>
-    <h1>CineArena.live</h1>
 
-    <div class="search-container">
-        <input type="text" id="search" class="search-box" placeholder="Search movies...">
-    </div>
+<header class="p-4 bg-blue-900 text-center text-2xl font-bold">
+  <a href="cinearena.live">
+    <img src="https://cricstream4u.github.io/cinearena/cineheader.png" class="h-10 mx-auto">
+  </a>
+</header>
 
-    <section class="latest-released">
-        <h3>Latest Released Movies</h3>
-        <div class="movie-grid" id="movieGrid">
-            <!-- Movies will be loaded dynamically -->
-        </div>
-        <div class="see-more">
-            <button class="see-more-btn" id="seeMoreBtn">See More</button>
-        </div>
-    </section>
+<h1 class="section-title">🎬 Movies</h1>
 
-    <script>
-        const movieGrid = document.getElementById('movieGrid');
-        const seeMoreBtn = document.getElementById('seeMoreBtn');
+<div id="movies" class="movies-grid"></div>
 
-        // Movie Data (More than 10 to test 'See More')
-        const allMovies = [
-            { title: 'Movie 1', image: 'download1.jpeg' },
-            { title: 'Movie 2', image: 'download2.jpeg' },
-            { title: 'Movie 3', image: 'download3.jpeg' },
-            { title: 'Movie 4', image: 'download4.jpeg' },
-            { title: 'Movie 5', image: 'download5.jpeg' },
-            { title: 'Movie 6', image: 'download6.jpeg' },
-            { title: 'Movie 7', image: 'download7.jpeg' },
-            { title: 'Movie 8', image: 'download8.jpeg' },
-            { title: 'Movie 9', image: 'download9.jpeg' },
-            { title: 'Movie 10', image: 'download10.jpeg' }
-        ];
+<script>
+async function loadMovies() {
+  const url = "https://raw.githubusercontent.com/cinearena/Cine-Arena/main/movies.json"; 
+  const response = await fetch(url);
+  const data = await response.json();
+  const moviesDiv = document.getElementById("movies");
 
-        let visibleCount = 5; // Start with 5 movies
+  data.movies.forEach(movie => {
+    const card = document.createElement("div");
+    card.className = "movie-card";
+    card.onclick = () => window.open(movie.url, "_blank");
 
-        // Function to Render Movies
-        function renderMovies() {
-            movieGrid.innerHTML = ''; // Clear the grid
-            allMovies.slice(0, visibleCount).forEach(movie => {
-                const movieCard = document.createElement('div');
-                movieCard.classList.add('movie-card');
-                movieCard.setAttribute('data-title', movie.title);
-                movieCard.innerHTML = `
-                    <img src="${movie.image}" alt="${movie.title}">
-                    <h4>${movie.title}</h4>
-                `;
-                movieGrid.appendChild(movieCard);
-            });
+    card.innerHTML = `
+      <img src="${movie.image}" alt="${movie.title}">
+      <h3>${movie.title}</h3>
+    `;
+    moviesDiv.appendChild(card);
+  });
+}
+loadMovies();
+</script>
 
-            // Hide "See More" button when all movies are displayed
-            if (visibleCount >= allMovies.length) {
-                seeMoreBtn.style.display = 'none';
-            }
-        }
+<a href="https://t.me/cine_arena" class="telegram-float" target="_blank">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+</a>
 
-        // Handle "See More" Button Click
-        seeMoreBtn.addEventListener('click', () => {
-            visibleCount += 5; // Load 5 more movies
-            renderMovies();
-        });
-
-        // Search Functionality
-        document.getElementById('search').addEventListener('input', function () {
-            let searchValue = this.value.toLowerCase();
-            let movieCards = document.querySelectorAll('.movie-card');
-
-            movieCards.forEach(movie => {
-                let title = movie.getAttribute('data-title').toLowerCase();
-                movie.style.display = title.includes(searchValue) ? "flex" : "none";
-            });
-        });
-
-        renderMovies(); // Initial render with first 5 movies
-    </script>
 </body>
 </html>
