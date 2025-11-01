@@ -13,7 +13,6 @@ body {
   color: white;
 }
 
-/* HEADER */
 header {
   background: #111;
   padding: 12px 18px;
@@ -31,21 +30,13 @@ header {
 nav {
   margin-right: 10px;
 }
-
 nav a {
-  color: #f4f4f4;
+  color: #fff;
   text-decoration: none;
   margin-left: 14px;
   font-size: 16px;
-  font-weight: 500;
 }
 
-/* MOBILE HIDE MENU */
-@media(max-width:768px){
-  nav { display: none; }
-}
-
-/* GRID */
 .movies {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -53,21 +44,19 @@ nav a {
   padding: 15px;
 }
 
-/* CARD */
 .movie-card {
   background: #1b1b1b;
   border-radius: 12px;
   padding: 10px;
   text-align: center;
-  transition: 0.3s;
+  transition: .3s;
 }
-.movie-card:hover{ transform: scale(1.04); }
+.movie-card:hover { transform: scale(1.05); }
 
 .movie-card img {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  object-fit: contain;
 }
 
 .play-btn {
@@ -79,10 +68,8 @@ nav a {
   cursor: pointer;
   margin-top: 6px;
 }
-
 .play-btn:hover { background: #ff3380; }
 
-/* LOAD MORE */
 .load-btn {
   width: 90%;
   margin: 20px auto;
@@ -92,9 +79,9 @@ nav a {
   border: none;
   padding: 10px;
   border-radius: 8px;
+  cursor: pointer;
 }
 
-/* TELEGRAM ICON */
 .telegram-float {
   position: fixed;
   bottom: 20px;
@@ -113,9 +100,7 @@ nav a {
 
 <header>
   <div class="logo">CINE ARENA</div>
-  <nav>
-    <a href="#">Movies</a>
-  </nav>
+  <nav><a href="#">Movies</a></nav>
 </header>
 
 <h2 style="padding-left:15px;">🎬 Movies</h2>
@@ -128,10 +113,10 @@ nav a {
 let index = 0;
 const limit = 20;
 
-fetch("https://raw.githubusercontent.com/cinearena/Cine-Arena/main/movies.json")
+fetch("https://raw.githubusercontent.com/yourusername/yourrepo/main/movies.json")
 .then(r=>r.json())
 .then(data=>{
-  const list = data.matches;
+  const list = data.movies;
   const moviesDiv = document.getElementById("movies");
   const btn = document.getElementById("loadMoreMovies");
 
@@ -139,7 +124,7 @@ fetch("https://raw.githubusercontent.com/cinearena/Cine-Arena/main/movies.json")
     list.slice(index,index+limit).forEach(movie=>{
       moviesDiv.innerHTML += `
       <div class="movie-card">
-        <img src="${movie.src}" alt="${movie.title}">
+        <img src="${movie.image}" alt="${movie.title}">
         <h3>${movie.title}</h3>
         <button class="play-btn" onclick="window.open('${movie.url}','_blank')">▶ Play</button>
       </div>`;
