@@ -111,28 +111,59 @@
 <h1 class="section-title">🎬 Movies</h1>
 
 <div id="movies" class="movies-grid"></div>
+  <div class="text-center mt-4">
+  <button id="loadMoreMovies" class="play-btn">Load More Movies</button>
+</div>
 
 <script>
 async function loadMovies() {
-  const url = "https://raw.githubusercontent.com/cinearena/Cine-Arena/main/movies.json"; 
+  const url = "https://raw.githubusercontent.com/cinearena/Cine-Arena/main/movies.json";
   const response = await fetch(url);
   const data = await response.json();
+
   const moviesDiv = document.getElementById("movies");
+  const moviesBtn = document.getElementById("loadMoreMovies");
 
-  data.movies.forEach(movie => {
-    const card = document.createElement("div");
-    card.className = "movie-card";
-    card.onclick = () => window.open(movie.url, "_blank");
+  let movieIndex = 0;
+  const limit = 20;
+  const movieList = data.matches;
 
-    card.innerHTML = `
-      <img src="${movie.image}" alt="${movie.title}">
-      <h3>${movie.title}</h3>
-    `;
-    moviesDiv.appendChild(card);
+  function renderMovies(list, container, index) {
+    list.slice(index, index + limit).forEach(movie => {
+      const card = document.createElement("div");
+      card.className = "match-card";
+      card.innerHTML = `
+        <img src="${movie.src}" alt="${movie.title}">
+        <h3>${movie.title}</h3>
+        <p>${movie.event_name || ''}</p>
+        <p class="status ${movie.status}">${movie.status}</p>
+        <button class="play-btn">▶ Play</button>
+      `;
+      card.querySelector(".play-btn").onclick = () => {
+        if (movie.url) window.open(movie.url, "_blank");
+        else alert("Stream Not Available 😔");
+      };
+      container.appendChild(card);
+    });
+  }
+
+  // Initial Load
+  renderMovies(movieList, moviesDiv, 0);
+
+  // Load More Button
+  moviesBtn.addEventListener("click", () => {
+    movieIndex += limit;
+    renderMovies(movieList, moviesDiv, movieIndex);
+    if (movieIndex + limit >= movieList.length) moviesBtn.style.display = "none";
   });
+
+  // Hide button if less than 20
+  if (movieList.length <= limit) moviesBtn.style.display = "none";
 }
+
 loadMovies();
 </script>
+
 
 <a href="https://t.me/cine_arena" class="telegram-float" target="_blank">
    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
