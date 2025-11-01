@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cine Arena</title>
+<title>Cine Arena - Movies</title>
 
 <style>
 body {
@@ -40,15 +40,13 @@ nav a {
   font-weight: 500;
 }
 
-/* MOBILE NAV */
+/* MOBILE HIDE MENU */
 @media(max-width:768px){
-  nav {
-    display: none;
-  }
+  nav { display: none; }
 }
 
-/* CARD GRID */
-.matches {
+/* GRID */
+.movies {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 14px;
@@ -56,38 +54,33 @@ nav a {
 }
 
 /* CARD */
-.match-card {
+.movie-card {
   background: #1b1b1b;
   border-radius: 12px;
   padding: 10px;
   text-align: center;
   transition: 0.3s;
 }
-.match-card:hover{
-  transform: scale(1.04);
-}
+.movie-card:hover{ transform: scale(1.04); }
 
-.match-card img {
+.movie-card img {
   width: 100%;
-  height: auto;         /* ✅ Full Image Show */
+  height: auto;
   border-radius: 10px;
-  object-fit: contain;  /* ✅ Prevent Crop */
+  object-fit: contain;
 }
 
-/* PLAY BUTTON */
 .play-btn {
   background: #ff0066;
   border: none;
   color: white;
   padding: 8px 14px;
   border-radius: 8px;
-  margin-top: 6px;
   cursor: pointer;
-  transition: 0.3s;
+  margin-top: 6px;
 }
-.play-btn:hover {
-  background: #ff3380;
-}
+
+.play-btn:hover { background: #ff3380; }
 
 /* LOAD MORE */
 .load-btn {
@@ -99,10 +92,9 @@ nav a {
   border: none;
   padding: 10px;
   border-radius: 8px;
-  cursor: pointer;
 }
 
-/* FLOATING TELEGRAM ICON */
+/* TELEGRAM ICON */
 .telegram-float {
   position: fixed;
   bottom: 20px;
@@ -122,56 +114,44 @@ nav a {
 <header>
   <div class="logo">CINE ARENA</div>
   <nav>
-    <a href="#sports">Sports</a>
-    <a href="#movies">Movies</a>
+    <a href="#">Movies</a>
   </nav>
 </header>
 
-<!-- SPORTS SECTION -->
-<h2 style="padding-left:15px;">🏆 Sports</h2>
-<div id="sports" class="matches"></div>
-<button id="loadMoreSports" class="load-btn">Load More Sports</button>
-
-<!-- MOVIES SECTION -->
 <h2 style="padding-left:15px;">🎬 Movies</h2>
-<div id="movies" class="matches"></div>
-<button id="loadMoreMovies" class="load-btn">Load More Movies</button>
+<div id="movies" class="movies"></div>
+<button id="loadMoreMovies" class="load-btn">Load More</button>
 
-<!-- TELEGRAM FLOAT -->
 <a href="https://t.me/cine_arena" class="telegram-float">✈</a>
 
 <script>
-function loadSection(jsonURL, containerID, loadBtnID) {
-  let index = 0;
-  const limit = 20;
+let index = 0;
+const limit = 20;
 
-  fetch(jsonURL).then(r => r.json()).then(data => {
-    const list = data.matches;
-    const container = document.getElementById(containerID);
-    const btn = document.getElementById(loadBtnID);
+fetch("https://raw.githubusercontent.com/cinearena/Cine-Arena/main/movies.json")
+.then(r=>r.json())
+.then(data=>{
+  const list = data.matches;
+  const moviesDiv = document.getElementById("movies");
+  const btn = document.getElementById("loadMoreMovies");
 
-    function showMore() {
-      list.slice(index, index + limit).forEach(item => {
-        container.innerHTML += `
-        <div class="match-card">
-          <img src="${item.src}">
-          <h3>${item.title}</h3>
-          <p>${item.event_name || ""}</p>
-          <button class="play-btn" onclick="window.open('${item.url}','_blank')">▶ Play</button>
-        </div>`;
-      });
+  function showMore(){
+    list.slice(index,index+limit).forEach(movie=>{
+      moviesDiv.innerHTML += `
+      <div class="movie-card">
+        <img src="${movie.src}" alt="${movie.title}">
+        <h3>${movie.title}</h3>
+        <button class="play-btn" onclick="window.open('${movie.url}','_blank')">▶ Play</button>
+      </div>`;
+    });
 
-      index += limit;
-      if(index >= list.length) btn.style.display = "none";
-    }
+    index += limit;
+    if(index >= list.length) btn.style.display = "none";
+  }
 
-    showMore();
-    btn.addEventListener("click", showMore);
-  });
-}
-
-loadSection("https://raw.githubusercontent.com/cinearena/Cine-Arena/main/sports.json","sports","loadMoreSports");
-loadSection("https://raw.githubusercontent.com/cinearena/Cine-Arena/main/movies.json","movies","loadMoreMovies");
+  showMore();
+  btn.addEventListener("click", showMore);
+});
 </script>
 
 </body>
