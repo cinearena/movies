@@ -2,39 +2,43 @@
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cine Arena - Movies</title>
-  <link rel="shortcut icon" href="https://cinearena.github.io/astro-jwplyr/faviconimg.jpeg" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://cinearena.github.io/astro-jwplyr/faviconimg.jpeg" />
+  <title>Cine Arena</title>
+   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     body {
-      background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
-      color: white;
-      margin: 0;
       font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
+      margin: 0;
+      color: white;
+      padding-top: 60px !important;
     }
 
+    /* Pretty Section Heading */
     .section-title {
       text-align: center;
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 800;
-      margin: 20px 0 10px;
+      margin: 40px 0 5px;
       text-transform: uppercase;
       background: linear-gradient(90deg, #ff0077, #00eaff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      position: relative;
     }
+
     .section-title::after {
       content: "";
-      width: 90px;
+      width: 100px;
       height: 4px;
       background: linear-gradient(90deg, #ff0077, #00eaff);
       display: block;
       margin: 6px auto 0;
-      border-radius: 6px;
+      border-radius: 10px;
     }
 
-    /* Movies Grid */
+     /* Movies Grid */
     .movies-grid {
       display: grid;
       gap: 15px;
@@ -89,50 +93,112 @@
     }
     .load-btn:hover { background: #0070d1; }
 
-    /* Telegram Floating Button */
     .telegram-float {
-      position: fixed;
-      width: 55px;
-      height: 55px;
-      bottom: 20px;
-      right: 20px;
-      background: #0088cc;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      transition: .3s;
-    }
-    .telegram-float:hover { transform: scale(1.12); }
-    .telegram-float img { width: 60%; }
+  position: fixed;
+  width: 55px;
+  height: 55px;
+  bottom: 20px;
+  right: 20px;
+  background: #0088cc;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.telegram-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 12px 18px rgba(0,0,0,0.4);
+}
+
+.telegram-float img {
+  width: 60%;
+  filter: invert(0); /* keep original color */
+}
+
   </style>
 </head>
 
-<body>
+<body >
 
-<header class="p-4 bg-blue-900 text-center text-2xl font-bold">
-  <a href="https://cinearena.live">
-    <img src="https://cricstream4u.github.io/cinearena/cineheader.png" class="h-10 mx-auto">
+  <!-- Header -->
+
+  <header class="bg-blue-900 text-white flex items-center justify-between px-6 py-3 fixed w-full top-0 z-50">
+
+  <!-- Mobile Menu Button -->
+  <button id="open-menu" class="text-2xl md:hidden mr-2">☰</button>
+
+  <!-- Logo (space from left already due to px-6, but adding extra) -->
+  <a href="https://cinearena.live" class="ml-2">
+    <img src="https://cricstream4u.github.io/cinearena/cineheader.png" class="h-9">
   </a>
+
+  <!-- Desktop Menu (add extra right spacing) -->
+  <nav class="hidden md:flex space-x-6 text-lg mr-4">
+    <a href="https://cinearena.live" class="hover:text-cyan-300">Home</a>
+    <a href="/sports.html" class="hover:text-cyan-300">Sports</a>
+    <a href="/music.html" class="hover:text-cyan-300">Music</a>
+    <a href="/movies.html" class="hover:text-cyan-300">Movies</a>
+    <a href="https://t.me/cine_arena" target="_blank" class="hover:text-cyan-300">Telegram</a>
+  </nav>
+
 </header>
 
-<h1 class="section-title">🎬 Movies</h1>
+<div id="sidebar"
+  class="fixed top-0 left-0 h-full w-64 bg-blue-800 text-white transform -translate-x-full transition-transform duration-300 z-50 shadow-2xl md:hidden">
+
+  <div class="p-4 text-center text-xl font-bold border-b border-blue-600">
+    Menu
+  </div>
+
+  <nav class="flex flex-col text-lg">
+    <a href="https://cinearena.live" class="py-3 px-4 hover:bg-blue-700">🏠 Home</a>
+    <a href="/sports.html" class="py-3 px-4 hover:bg-blue-700">⚽ Sports</a>
+    <a href="/music.html" class="py-3 px-4 hover:bg-blue-700">🎵 Music</a>
+    <a href="/movies.html" class="py-3 px-4 hover:bg-blue-700">🎬 Movies</a>
+    <a href="https://t.me/cine_arena" target="_blank" class="py-3 px-4 hover:bg-blue-700">📢 Telegram</a>
+  </nav>
+</div>
+
+<div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 md:hidden"></div>
+
 
 <!-- Search Bar -->
-<div class="px-6 pb-3">
+<div class="px-6 pb-3 w-14 mt-5">
   <input id="searchInput" type="text" placeholder="Search Movies..." 
   class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 outline-none text-white">
 </div>
 
-<div id="movies" class="movies-grid"></div>
+  <!--- Main Content -->
+  <h1 class="section-title">🎬 Latest Movies</h1>
+
+  <div id="movies" class="movies-grid"></div>
 <button id="loadMore" class="load-btn">Load More</button>
 
-<a href="https://t.me/cine_arena" class="telegram-float" target="_blank">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
-</a>
 
-<script>
+ <script>
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const openMenu = document.getElementById("open-menu");
+
+  openMenu.addEventListener("click", () => {
+    sidebar.classList.remove("-translate-x-full");
+    overlay.classList.remove("hidden");
+  });
+
+  overlay.addEventListener("click", () => {
+    sidebar.classList.add("-translate-x-full");
+    overlay.classList.add("hidden");
+  });
+</script>
+
+<!--- movies grid -->
+  <script>
 let allMovies = [];
 let index = 0;
 const limit = 20;
@@ -174,6 +240,13 @@ document.getElementById("searchInput").addEventListener("input", () => {
 
 loadMovies();
 </script>
+
+
+
+
+  <a href="https://t.me/cine_arena" class="telegram-float" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+</a>
 
 </body>
 </html>
