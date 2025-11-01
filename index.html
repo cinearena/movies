@@ -121,6 +121,17 @@
   filter: invert(0); /* keep original color */
 }
 
+    /* Desktop / Laptop */
+@media (min-width: 768px) {
+  .search-box {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+
+/* Mobile stays full width (no change needed) */
+
+
   </style>
 </head>
 
@@ -169,10 +180,12 @@
 
 
 <!-- Search Bar -->
-<div class="px-6 pb-3  mt-5 ml-40 mr-40">
-  <input id="searchInput" type="text" placeholder="Search Movies..." 
+<!-- Search Bar -->
+<div class="search-box px-3 pb-3 mt-5">
+  <input id="searchInput" type="text" placeholder="Search Movies, Sports, Music..."
   class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 outline-none text-white">
 </div>
+
 
   <!--- Main Content -->
   <h1 class="section-title">🎬 Latest Movies</h1>
