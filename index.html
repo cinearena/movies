@@ -213,7 +213,7 @@
 <!--- movies grid -->
   <script>
 let allMovies = [];
-let index = 0;
+let startIndex = 0;
 const limit = 20;
 
 async function loadMovies() {
@@ -221,17 +221,25 @@ async function loadMovies() {
   const response = await fetch(url);
   const data = await response.json();
   allMovies = data.movies;
-  renderMovies();
+  displayMovies();
 }
 
-function renderMovies() {
+function displayMovies(reset = false) {
   const grid = document.getElementById("movies");
   const searchValue = document.getElementById("searchInput").value.toLowerCase();
 
+  // Filter
   const filteredMovies = allMovies.filter(m => m.title.toLowerCase().includes(searchValue));
 
-  grid.innerHTML = "";
-  filteredMovies.slice(0, index + limit).forEach(movie => {
+  // Reset when searching
+  if (reset) {
+    startIndex = 0;
+    grid.innerHTML = "";
+  }
+
+  const moviesToShow = filteredMovies.slice(startIndex, startIndex + limit);
+
+  moviesToShow.forEach(movie => {
     grid.innerHTML += `
       <div class="movie-card" onclick="window.open('${movie.url}', '_blank')">
         <img src="${movie.image}" alt="${movie.title}">
@@ -239,19 +247,18 @@ function renderMovies() {
       </div>`;
   });
 
-  index += limit;
+  startIndex += limit;
 
+  // Hide button when no more data
   document.getElementById("loadMore").style.display =
-    (index >= filteredMovies.length) ? "none" : "block";
+    startIndex >= filteredMovies.length ? "none" : "block";
 }
 
-document.getElementById("loadMore").addEventListener("click", renderMovies);
-document.getElementById("searchInput").addEventListener("input", () => {
-  index = 0; 
-  renderMovies();
-});
+document.getElementById("loadMore").addEventListener("click", () => displayMovies());
+document.getElementById("searchInput").addEventListener("input", () => displayMovies(true));
 
 loadMovies();
+
 </script>
 
 
