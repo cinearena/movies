@@ -214,7 +214,7 @@
   <script>
 let allMovies = [];
 let startIndex = 0;
-const limit = 20;
+const limit = 24; // ✅ Load 24 each time
 
 async function loadMovies() {
   const url = "https://raw.githubusercontent.com/cinearena/Cine-Arena/main/movies.json"; 
@@ -228,15 +228,16 @@ function displayMovies(reset = false) {
   const grid = document.getElementById("movies");
   const searchValue = document.getElementById("searchInput").value.toLowerCase();
 
-  // Filter
-  const filteredMovies = allMovies.filter(m => m.title.toLowerCase().includes(searchValue));
-
   // Reset when searching
   if (reset) {
     startIndex = 0;
     grid.innerHTML = "";
   }
 
+  // Filter movie list
+  const filteredMovies = allMovies.filter(m => m.title.toLowerCase().includes(searchValue));
+
+  // Select next 24
   const moviesToShow = filteredMovies.slice(startIndex, startIndex + limit);
 
   moviesToShow.forEach(movie => {
@@ -249,7 +250,7 @@ function displayMovies(reset = false) {
 
   startIndex += limit;
 
-  // Hide button when no more data
+  // Hide Load More button if finished
   document.getElementById("loadMore").style.display =
     startIndex >= filteredMovies.length ? "none" : "block";
 }
