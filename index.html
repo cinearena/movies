@@ -137,46 +137,36 @@
 
 <body >
 
-  <!-- Header -->
-
-  <header class="bg-blue-900 text-white flex items-center justify-between px-6 py-3 fixed w-full top-0 z-50">
-
-  <!-- Mobile Menu Button -->
+<header class="bg-blue-900 text-white flex items-center justify-between px-6 py-4 fixed w-full top-0 z-50 shadow">
   <button id="open-menu" class="text-2xl md:hidden mr-2">☰</button>
-
-  <!-- Logo (space from left already due to px-6, but adding extra) -->
-  <a href="https://cinearena.live" class="ml-2">
+  <a href="https://cinearena.live">
     <img src="https://cricstream4u.github.io/cinearena/cineheader.png" class="h-9">
   </a>
-
-  <!-- Desktop Menu (add extra right spacing) -->
-  <nav class="hidden md:flex space-x-6 text-lg mr-4">
+  <nav class="hidden md:flex space-x-6 text-lg">
     <a href="https://cinearena.live" class="hover:text-cyan-300">Home</a>
     <a href="https://cinearena.github.io/sports/" class="hover:text-cyan-300">Sports</a>
-    <a href="https://cinearena.github.io/music/" class="hover:text-cyan-300">Music</a>
+    <a href="https://cinearena.live/fancode.html" target="_blank" class="hover:text-cyan-300">Fancode</a>
     <a href="https://cinearena.github.io/movies/" class="hover:text-cyan-300">Movies</a>
-    <a href="https://t.me/cine_arena" target="_blank" class="hover:text-cyan-300">Telegram</a>
+    <a href="https://cinearena.github.io/music/" class="hover:text-cyan-300">Music</a>
   </nav>
-
 </header>
 
-<div id="sidebar"
-  class="fixed top-0 left-0 h-full w-64 bg-blue-800 text-white transform -translate-x-full transition-transform duration-300 z-50 shadow-2xl md:hidden">
+<!-- ✅ Mobile Sidebar -->
+<div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
-  <div class="p-4 text-center text-xl font-bold border-b border-blue-600">
-    Menu
+<div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-blue-900 text-white z-50 p-5 transform -translate-x-full transition-transform duration-300">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-lg font-bold">Menu</h2>
+    <button id="close-menu" class="text-2xl">✕</button>
   </div>
-
-  <nav class="flex flex-col text-lg">
-    <a href="https://cinearena.live" class="py-3 px-4 hover:bg-blue-700">🏠 Home</a>
-    <a href="https://cinearena.github.io/sports/" class="py-3 px-4 hover:bg-blue-700">⚽ Sports</a>
-    <a href="https://cinearena.github.io/music/" class="py-3 px-4 hover:bg-blue-700">🎵 Music</a>
-    <a href="https://cinearena.github.io/movies/" class="py-3 px-4 hover:bg-blue-700">🎬 Movies</a>
-    <a href="https://t.me/cine_arena" target="_blank" class="py-3 px-4 hover:bg-blue-700">📢 Telegram</a>
+  <nav class="flex flex-col space-y-4 text-lg">
+    <a href="https://cinearena.live" class="hover:text-cyan-300">Home</a>
+    <a href="https://cinearena.github.io/sports/" class="hover:text-cyan-300">Sports</a>
+    <a href="https://cinearena.live/fancode.html" target="_blank" class="hover:text-cyan-300">Fancode</a>
+    <a href="https://cinearena.github.io/movies/" class="hover:text-cyan-300">Movies</a>
+    <a href="https://cinearena.github.io/music/" class="hover:text-cyan-300">Music</a>
   </nav>
-</div>
-
-<div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 md:hidden"></div>
+</div>    
 
 
 <!-- Search Bar -->
@@ -193,15 +183,21 @@
   <div id="movies" class="movies-grid"></div>
 <button id="loadMore" class="load-btn">Load More</button>
 
-
- <script>
+ <!--- For Mennu -->   
+<script>
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("overlay");
   const openMenu = document.getElementById("open-menu");
+  const closeMenu = document.getElementById("close-menu");
 
   openMenu.addEventListener("click", () => {
     sidebar.classList.remove("-translate-x-full");
     overlay.classList.remove("hidden");
+  });
+
+  closeMenu.addEventListener("click", () => {
+    sidebar.classList.add("-translate-x-full");
+    overlay.classList.add("hidden");
   });
 
   overlay.addEventListener("click", () => {
@@ -209,6 +205,7 @@
     overlay.classList.add("hidden");
   });
 </script>
+ 
 
 <!--- movies grid -->
   <script>
